@@ -1,0 +1,18 @@
+.card-custom {
+	height: 200px;
+	transition: all 0.3s ease;
+}
+
+.card-custom:hover {
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+	transform: translateY(-5px);
+}
+
+section {
+	min-height: 100vh;
+	padding: 60px 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
