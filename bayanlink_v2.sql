@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2024 at 10:48 AM
+-- Generation Time: Sep 07, 2024 at 12:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bayanlink`
+-- Database: `bayanlink_v2`
 --
 
 -- --------------------------------------------------------
@@ -139,7 +139,9 @@ INSERT INTO `tbl_logs` (`log_id`, `log_desc`, `log_date`, `user_id`) VALUES
 (7, 'User admin123 updated the terms and conditions', '2024-09-05 12:45:30', 5),
 (8, 'User admin123 updated the terms and conditions', '2024-09-05 12:45:51', 5),
 (9, 'User admin123 updated the terms and conditions', '2024-09-05 12:51:31', 5),
-(10, 'Terms and Conditions deleted by user admin123.', '2024-09-05 12:53:25', 5);
+(10, 'Terms and Conditions deleted by user admin123.', '2024-09-05 12:53:25', 5),
+(11, 'User Qwerty123 proccessed a document', '2024-09-07 11:53:48', 1),
+(12, 'User pao requested a Barangay Residency', '2024-09-07 12:07:58', 2);
 
 -- --------------------------------------------------------
 
@@ -154,6 +156,13 @@ CREATE TABLE `tbl_notification` (
   `status` varchar(55) DEFAULT NULL,
   `notify_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_notification`
+--
+
+INSERT INTO `tbl_notification` (`notify_id`, `user_id`, `description`, `status`, `notify_date`) VALUES
+(1, 2, 'Processed', 'read', '2024-09-07 11:53:48');
 
 -- --------------------------------------------------------
 
@@ -191,17 +200,6 @@ CREATE TABLE `tbl_requests` (
   `req_id` int(22) NOT NULL,
   `user_id` int(22) NOT NULL,
   `req_date` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `req_fname` varchar(55) NOT NULL,
-  `req_mname` varchar(55) NOT NULL,
-  `req_lname` varchar(55) NOT NULL,
-  `req_contactNo` varchar(55) NOT NULL,
-  `req_gender` varchar(55) NOT NULL,
-  `req_brgy` varchar(55) NOT NULL,
-  `req_purok` varchar(55) NOT NULL,
-  `req_age` int(55) NOT NULL,
-  `req_dateOfBirth` date NOT NULL,
-  `req_placeOfBirth` varchar(55) NOT NULL,
-  `req_civilStatus` varchar(55) NOT NULL,
   `req_eSignature` text NOT NULL,
   `req_typeOfDoc` varchar(75) NOT NULL,
   `req_valid_id` text NOT NULL,
@@ -213,13 +211,8 @@ CREATE TABLE `tbl_requests` (
 -- Dumping data for table `tbl_requests`
 --
 
-INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_fname`, `req_mname`, `req_lname`, `req_contactNo`, `req_gender`, `req_brgy`, `req_purok`, `req_age`, `req_dateOfBirth`, `req_placeOfBirth`, `req_civilStatus`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_status`, `req_reasons`) VALUES
-(1, 2, '2024-09-05 15:45:53', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d8580059604].png', 'Barangay Clearance', 'id-[BayanLink-66d8580059608].png', 'Pending', NULL),
-(2, 2, '2024-09-05 15:45:57', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d858292f544].png', 'Job Seeker', 'id-[BayanLink-66d858292f548].png', 'Approved', NULL),
-(3, 2, '2024-09-05 15:46:02', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d85d06d9961].png', 'Barangay Residency', 'id-[BayanLink-66d85d06d9964].png', 'Cancelled', 'Invalid or expired information, Insufficient supporting documents, '),
-(4, 2, '2024-09-05 15:46:07', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d85d28825a0].png', 'Barangay Indigency', 'id-[BayanLink-66d85d28825a3].png', 'Approved', NULL),
-(5, 2, '2024-09-05 15:46:09', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'c-[BayanLink-66d8697272b9c].jpg', 'Barangay Clearance', 'doThis-[BayanLink-66d8697272b9f].png', 'Processing', NULL),
-(6, 2, '2024-09-05 15:46:12', 'Pao', 'Pao', 'Pao', '09876543212', 'Male', 'Malapit', 'Purok 2', 34, '1990-04-28', 'San Isidro, Nueva Ecija', 'Single', 'ss-[BayanLink-66d91b64b3193].png', 'Job Seeker', 'id-[BayanLink-66d91b64b3195].png', 'Cancelled', NULL);
+INSERT INTO `tbl_requests` (`req_id`, `user_id`, `req_date`, `req_eSignature`, `req_typeOfDoc`, `req_valid_id`, `req_status`, `req_reasons`) VALUES
+(1, 2, '2024-09-07 12:07:58', 'ss-[BayanLink-66dbd19ec164b].png', 'Barangay Residency', 'id-[BayanLink-66dbd19ec164f].png', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -444,13 +437,13 @@ ALTER TABLE `tbl_home`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `log_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_notification`
 --
 ALTER TABLE `tbl_notification`
-  MODIFY `notify_id` int(22) NOT NULL AUTO_INCREMENT;
+  MODIFY `notify_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_posts`
@@ -462,7 +455,7 @@ ALTER TABLE `tbl_posts`
 -- AUTO_INCREMENT for table `tbl_requests`
 --
 ALTER TABLE `tbl_requests`
-  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `req_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_services`
