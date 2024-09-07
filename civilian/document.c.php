@@ -279,24 +279,6 @@ if ($user_role != 0) {
                         <form id="requestDocumentForm" action="civilian_includes/create_reqDoc.php" method="POST" enctype="multipart/form-data">
                             <!-- Step 1: Request For and Document Type -->
                             <div id="step1" class="form-step">
-                                <div class="text-start">
-                                    <label class="form-label">Request For :</label>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input id="forYourself" class="form-check-input" type="radio" name="requestType" value="yourself" checked>
-                                                <label class="form-check-label " for="forYourself">Yourself</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input id="forOthers" class="form-check-input" type="radio" name="requestType" value="others">
-                                                <label class="form-check-label " for="forOthers">Others</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="form-floating mb-3">
                                     <select id="documentType" name="docType" class="form-select" required>
                                         <!-- show all document type from database -->
@@ -606,7 +588,6 @@ if ($user_role != 0) {
             document.getElementById('user_age').value = age;
         });
 
-
         // es img
         document.getElementById("eSignature").addEventListener("change", function(event) {
             const fileInput = event.target;
@@ -778,43 +759,8 @@ if ($user_role != 0) {
                 setTimeout(updateReqDocs, 30000);
             }
 
-            // Initial load
+            // Initial load for req docu
             updateReqDocs();
-
-            // others selected
-            function updateFields() {
-                if ($('#forOthers').is(':checked')) {
-                    // Clear the fields if "Others" is selected
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #placeOfBirth, #civilStatus').prop('disabled', false).val('');
-                } else if ($('#forYourself').is(':checked')) {
-                    // Restore values and disable fields if "Yourself" is selected
-                    $('#firstName').val('<?php echo $_SESSION['user_fname']; ?>').prop('disabled', true);
-                    $('#middleName').val('<?php echo $_SESSION['user_mname']; ?>').prop('disabled', true);
-                    $('#lastName').val('<?php echo $_SESSION['user_lname']; ?>').prop('disabled', true);
-                    $('#contactNumber').val('<?php echo $_SESSION['user_contactNum']; ?>').prop('disabled', true);
-                    $('#user_gender').val('<?php echo $_SESSION['user_gender']; ?>').prop('disabled', true);
-
-                    $('#user_brgy').val('<?php echo $_SESSION['user_brgy']; ?>').prop('disabled', true);
-                    $('#user_purok').val('<?php echo $_SESSION['user_purok']; ?>').prop('disabled', true);
-                    $('#dateOfBirth').val('<?php echo $_SESSION['dateOfBirth']; ?>').prop('disabled', true);
-                    $('#user_age').val('<?php echo $_SESSION['user_age']; ?>').prop('disabled', true);
-                    $('#placeOfBirth').val('<?php echo $_SESSION['placeOfBirth']; ?>').prop('disabled', true);
-                    $('#civilStatus').val('<?php echo $_SESSION['civilStatus']; ?>').prop('disabled', true);
-
-                }
-
-                $('#btnReqDocument').on('click', function() {
-                    console.log('clicked');
-                    $('#firstName, #lastName, #middleName, #contactNumber, #user_gender, #user_brgy, #user_purok, #dateOfBirth, #user_age, #placeOfBirth, #civilStatus').prop('disabled', false);
-                });
-
-            }
-
-            updateFields();
-
-            // Event listeners for radio buttons
-            $('#forOthers').on('change', updateFields);
-            $('#forYourself').on('change', updateFields);
 
             // Get the buttons and steps
             const steps = [

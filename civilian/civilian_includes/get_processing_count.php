@@ -30,7 +30,15 @@ if ($user_role != 0) {
     exit;
 }
 
-$query = mysqli_query($con, "SELECT * FROM tbl_requests WHERE user_id = '$getUserid' && req_brgy = '$civilian_brgy' && req_status = 'Processing'");
+$query = mysqli_query($con, "
+    SELECT r.* 
+    FROM tbl_requests r
+    JOIN tbl_useracc u 
+    ON r.user_id = u.user_id
+    WHERE r.user_id = '$getUserid' 
+    AND u.user_brgy = '$civilian_brgy' 
+    AND r.req_status = 'Processing'
+");
 
 if ($query) {
     $countProcessing = mysqli_num_rows($query);

@@ -10,10 +10,41 @@ if (empty($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $civilian_brgy = $_SESSION['user_brgy'];
 
-$query = "SELECT req_id, user_id, req_date, req_fname, req_mname, req_lname, req_contactNo, req_gender, req_brgy, req_purok, req_age, req_dateOfBirth, req_placeOfBirth, req_civilStatus, req_typeOfDoc, req_status
-          FROM tbl_requests
-          WHERE user_id = '$user_id' && req_brgy = '$civilian_brgy' && req_status = 'Approved'
-          ORDER BY req_date DESC";
+$query = "
+    SELECT 
+        r.req_id, 
+        r.user_id, 
+        r.req_date, 
+        r.req_typeOfDoc, 
+        r.req_status,
+        u.user_brgy, 
+        u.user_fname, 
+        u.user_mname, 
+        u.user_lname, 
+        u.user_gender, 
+        u.user_contactNum, 
+        u.dateOfBirth, 
+        u.user_age, 
+        u.placeOfBirth, 
+        u.civilStatus, 
+        u.user_city, 
+        u.user_purok
+    FROM 
+        tbl_requests r
+    JOIN 
+        tbl_useracc u
+    ON 
+        r.user_id = u.user_id
+    WHERE 
+        r.user_id = '$user_id' 
+    AND 
+        u.user_brgy = '$civilian_brgy' 
+    AND 
+        r.req_status = 'Approved'
+    ORDER BY 
+        r.req_date DESC
+";
+
 
 
 $result = mysqli_query($con, $query);
@@ -33,17 +64,17 @@ while ($data = mysqli_fetch_assoc($result)) {
     $reqId = $data['req_id'];
     $userId = $data['user_id'];
     $reqDate = $data['req_date'];
-    $fname = $data['req_fname'];
-    $mname = $data['req_mname'];
-    $lname = $data['req_lname'];
-    $contactNo = $data['req_contactNo'];
-    $gender = $data['req_gender'];
-    $brgy = $data['req_brgy'];
-    $purok = $data['req_purok'];
-    $age = $data['req_age'];
-    $dateOfBirth = $data['req_dateOfBirth'];
-    $req_placeOfBirth = $data['req_placeOfBirth'];
-    $req_civilStatus = $data['req_civilStatus'];
+    $fname = $data['user_fname'];
+    $mname = $data['user_mname'];
+    $lname = $data['user_lname'];
+    $contactNo = $data['user_contactNum'];
+    $gender = $data['user_gender'];
+    $brgy = $data['user_brgy'];
+    $purok = $data['user_purok'];
+    $age = $data['user_age'];
+    $dateOfBirth = $data['dateOfBirth'];
+    $placeOfBirth = $data['placeOfBirth'];
+    $civilStatus = $data['civilStatus'];
     $docType = $data['req_typeOfDoc'];
     $status = $data['req_status'];
 
@@ -145,7 +176,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 <span class="ms-2">Place of Birth:</span>
                             </i>
                             <small>
-                                <?php echo $req_placeOfBirth; ?>
+                                <?php echo $placeOfBirth; ?>
                             </small>
                         </h6>
                     </div>
@@ -155,7 +186,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 <span class="ms-2">Civil Status:</span>
                             </i>
                             <small>
-                                <?php echo $req_civilStatus; ?>
+                                <?php echo $civilStatus; ?>
                             </small>
                         </h6>
                     </div>

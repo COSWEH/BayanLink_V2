@@ -30,7 +30,15 @@ if ($user_role != 1) {
     exit;
 }
 
-$query = mysqli_query($con, "SELECT * FROM tbl_requests WHERE req_brgy = '$admin_brgy' && req_status = 'Pending'");
+$query = mysqli_query($con, "
+    SELECT r.* 
+    FROM tbl_requests r
+    JOIN tbl_useracc u 
+    ON r.user_id = u.user_id
+    WHERE r.user_id = u.user_id
+    AND u.user_brgy = '$admin_brgy' 
+    AND r.req_status = 'Pending'
+");
 
 if ($query) {
     $countPending = mysqli_num_rows($query);

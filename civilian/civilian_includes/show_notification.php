@@ -17,7 +17,7 @@
     $checkUser = mysqli_query($con, "SELECT * FROM `tbl_useracc` WHERE `user_id` = '$getUserid' LIMIT 1");
     $countUser = mysqli_num_rows($checkUser);
 
-    $getReqID = "SELECT r.req_id, r.user_id, r.req_brgy
+    $getReqID = "SELECT r.req_id, r.user_id, u.user_brgy
             FROM tbl_requests AS r 
             INNER JOIN tbl_useracc AS u ON r.user_id = u.user_id
             WHERE r.user_id = '$getUserid'";
@@ -41,7 +41,7 @@
     if ($reqIDResult && mysqli_num_rows($reqIDResult) > 0) {
         $getReqIDdata = mysqli_fetch_assoc($reqIDResult);
         // $req_id = $getReqIDdata['user_id'];
-        $admin_brgy = $getReqIDdata['req_brgy'];
+        $admin_brgy = $getReqIDdata['user_brgy'];
 
         // Only proceed if req_id is not null
         if ($getUserid) {
