@@ -374,15 +374,22 @@ session_start();
 
                                 <div style="position: relative;">
                                     <div class="form-floating mb-3">
-                                        <input type="password" name="signup_password" class="form-control" id="signup_password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters">
+                                        <input type="password" name="signupPassword" class="form-control" id="signupPassword" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters">
                                         <span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="password-toggle">
                                             <i class="bi bi-eye-slash-fill"></i>
                                         </span>
-                                        <label for="signup_password" class="form-label">Password</label>
+                                        <label for="signupPassword" class="form-label">Password</label>
                                     </div>
                                 </div>
-
-
+                                <div style="position: relative;">
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="At least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters">
+                                        <span class="icon position-absolute top-50 end-0 translate-middle-y p-3" id="confirm-password-toggle">
+                                            <i class="bi bi-eye-slash-fill"></i>
+                                        </span>
+                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    </div>
+                                </div>
 
                                 <div class="form-check mb-3 d-flex align-items-center">
                                     <input class="form-check-input me-2" type="checkbox" id="agreeTerms">
@@ -398,7 +405,7 @@ session_start();
                                         </button>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <button type="submit" class="btn btn-primary w-100" id="registerBtn" disabled>
+                                        <button type="submit" name="btnSignup" class="btn btn-primary w-100" id="registerBtn" disabled>
                                             Register <i class="bi bi-check-square"></i>
                                         </button>
                                     </div>
@@ -974,7 +981,8 @@ session_start();
 
             // Initialize the toggle for each password field
             togglePasswordVisibility("signinPassword", "showPasswordIcon");
-            togglePasswordVisibility("signup_password", "password-toggle");
+            togglePasswordVisibility("signupPassword", "password-toggle");
+            togglePasswordVisibility("confirmPassword", "confirm-password-toggle");
 
         });
     </script>
