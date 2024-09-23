@@ -156,34 +156,35 @@ if ($user_role != 2) {
 
             <!-- main content -->
             <main class="col-12 col-md-9 content border rounded p-3">
+                <div class="card mb-3 shadow p-3">
+                    <div class="d-flex align-items-center">
+                        <!-- Profile Image -->
+                        <?php
+                        $getGender = $_SESSION['user_gender'];
+                        if ($getGender == "Male") {
+                            echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        } else {
+                            echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
+                        }
+                        ?>
+                        <button type="button" class="btn btn-lg ms-3  rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
+                            <i class="bi bi-images me-2"></i>
+                            Create post
+                        </button>
+                    </div>
+                    <hr>
+                </div>
                 <nav>
                     <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
                         <button class="nav-link active flex-fill " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">Municipal</button>
                         <button class="nav-link flex-fill " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="false">Barangay</button>
                     </div>
                 </nav>
-                <div class="tab-content mt-2 p-1" id="nav-tabContent">
+                <div class="tab-content mt-2 p-2 bg-dark-subtle rounded" id="nav-tabContent">
                     <!-- municipal -->
                     <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                         <!-- create post -->
-                        <div class="card mb-3 shadow p-3">
-                            <div class="d-flex align-items-center">
-                                <!-- Profile Image -->
-                                <?php
-                                $getGender = $_SESSION['user_gender'];
-                                if ($getGender == "Male") {
-                                    echo '<img src="../img/male-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
-                                } else {
-                                    echo '<img src="../img/female-user.png" alt="Profile Picture" class="img-fluid rounded-circle mb-2" style="width: 75px; height: 75px;">';
-                                }
-                                ?>
-                                <button type="button" class="btn btn-lg ms-3  rounded-5 w-100 bg-light-subtle" data-bs-toggle="modal" data-bs-target="#postModal">
-                                    <i class="bi bi-images me-2"></i>
-                                    Create post
-                                </button>
-                            </div>
-                            <hr>
-                        </div>
+
                         <!-- show all municipal post -->
                         <div id="municipalPost">
 

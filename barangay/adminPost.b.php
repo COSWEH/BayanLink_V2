@@ -179,7 +179,7 @@ if ($user_role != 1) {
                     <hr>
                 </div>
                 <!-- show all barangay post -->
-                <div id="brgyPost">
+                <div id="brgyPost" class="p-2 bg-dark-subtle rounded">
 
                 </div>
             </main>

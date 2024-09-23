@@ -46,7 +46,7 @@ if ($query) {
     // Display notification badge if there are unread notifications
 
     if ($countApproved > 0) {
-        echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">';
+        echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">';
         echo $countApproved;
         echo '</span>';
     }

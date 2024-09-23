@@ -21,12 +21,23 @@ if (!$result) {
     die('Error in query: ' . mysqli_error($con));
 }
 
+function makeClickableLinks($text)
+{
+    $text = preg_replace(
+        '#(https?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))?)#',
+        '<a href="$0" target="_blank">$0</a>',
+        $text
+    );
+    return $text;
+}
+
 while ($data = mysqli_fetch_assoc($result)) {
     $postId = $data['post_id'];
     $brgy = $data['user_brgy'];
     $fullname = $data['user_fname'] . " " . $data['user_mname'] . " " . $data['user_lname'];
     $fullname = ucwords(strtolower($fullname));
     $content = $data['post_content'];
+    $content = makeClickableLinks($content);
     $img = $data['post_img'];
     $getTime = $data['post_date'];
 
@@ -37,10 +48,10 @@ while ($data = mysqli_fetch_assoc($result)) {
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
                 <img src="../img/brgyIcon.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" style="width: 50px; height: 50px;">
-                <?php echo "<h6>$brgy</h6>"; ?>
+                <?php echo "<h6 class='fw-bold'>$brgy</h6>"; ?>
             </div>
             <p>
-                <small>
+                <small class="fw-bold">
                     <?php echo $get_Time_And_Day->format('h:i A D, M j, Y'); ?>
                 </small>
             </p>
@@ -88,10 +99,10 @@ while ($data = mysqli_fetch_assoc($result)) {
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <?php if ($imgCount > 4): ?>
-                                <a href="#" id="bpImage-toggle<?php echo $postId; ?>" class="text-primary">See more...</a>
-                            <?php endif; ?>
                         </div>
+                        <?php if ($imgCount > 4): ?>
+                            <a href="#" id="bpImage-toggle<?php echo $postId; ?>" class="text-primary">See more...</a>
+                        <?php endif; ?>
                 <?php
                     } else {
                         echo "<div class='col-12 col-md-6 col-sm-3 p-2'>
@@ -128,7 +139,8 @@ while ($data = mysqli_fetch_assoc($result)) {
                             <hr>
                             <div class="mb-3">
                                 <p class="fs-5">
-                                    <?php echo htmlspecialchars($content); ?>
+                                    <?php
+                                    echo nl2br($content); ?>
                                 </p>
                             </div>
 
@@ -159,14 +171,9 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 }
                                 ?>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-                <!-- Modal Close Button -->
-                <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
         </div>
     </div>
@@ -207,13 +214,14 @@ while ($data = mysqli_fetch_assoc($result)) {
                 let $content = $('#bpPost-text<?php echo $postId; ?>-content');
                 let $moreText = $('#bpPost-text<?php echo $postId; ?>-more');
                 let $toggleLink = $('#bpPost-text<?php echo $postId; ?>-toggle');
-                let fullText = "<?php echo addslashes($content); ?>"; // PHP variable output
+
+                let fullText = <?php echo json_encode(nl2br($content)); ?>;
 
                 let charLimit = $(window).width() > 992 ? 200 : 100; // 200 for large screens, 100 for small screens
                 let truncatedText = fullText.length > charLimit ? fullText.substr(0, charLimit) + '...' : fullText;
 
-                $content.text(truncatedText);
-                $moreText.text(fullText);
+                $content.html(truncatedText);
+                $moreText.html(fullText);
 
                 // Adjust font size based on screen width
                 if ($(window).width() > 992) { // Large screen
