@@ -178,9 +178,28 @@ if ($user_role != 1) {
                     </div>
                     <hr>
                 </div>
-                <!-- show all barangay post -->
-                <div id="brgyPost" class="p-2 bg-dark-subtle rounded">
 
+                <nav>
+                    <div class="nav nav-tabs w-100" id="nav-tab" role="tablist">
+                        <button class="nav-link active flex-fill " id="nav-brgy-tab" data-bs-toggle="tab" data-bs-target="#nav-brgy" type="button" role="tab" aria-controls="nav-brgy" aria-selected="true">Barangay</button>
+                        <button class="nav-link flex-fill " id="nav-municipal-tab" data-bs-toggle="tab" data-bs-target="#nav-municipal" type="button" role="tab" aria-controls="nav-municipal" aria-selected="false">Municipal</button>
+                    </div>
+                </nav>
+
+                <div class="tab-content mt-2 p-2 bg-dark-subtle rounded" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-brgy" role="tabpanel" aria-labelledby="nav-brgy-tab" tabindex="0">
+                        <!-- show all barangay post where you are registered -->
+                        <div id="brgyPost">
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-municipal" role="tabpanel" aria-labelledby="nav-municipal-tab" tabindex="0">
+                        <!-- show all municipal post -->
+                        <div id="municipalPost">
+
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -268,8 +287,13 @@ if ($user_role != 1) {
     <script>
         //load all brgy post from database
         $(document).ready(function() {
+            // brgyPost
             $.post('brgy_includes/show_brgyPost.b.php', {}, function(data) {
                 $("#brgyPost").html(data);
+            });
+            // municipalPost
+            $.post('brgy_includes/show_municipalPost.b.php', {}, function(data) {
+                $("#municipalPost").html(data);
             });
 
             function updateBrgyPost() {
@@ -278,8 +302,17 @@ if ($user_role != 1) {
 
                 });
             }
+
+            function updateMunicpalPost() {
+                $.post('brgy_includes/show_municipalPost.b.php', {}, function(data) {
+                    $("#municipalPost").html(data);
+                    setTimeout(updateMunicpalPost, 30000);
+                });
+            }
+
             // Initial call to load messages
             updateBrgyPost();
+            updateMunicpalPost();
 
             // show selected photos to the create post modal
             let selectedFiles = [];

@@ -211,9 +211,13 @@ if ($user_role != 0) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <p class="mb-2"><strong>Address:</strong></p>
-                                <p class="text-muted" id="address"><?php echo "Purok " . $_SESSION['user_purok'] . " Brgy. " . $_SESSION['user_brgy'] . ', ' . $_SESSION['user_city']; ?></p>
+                                <p class="text-muted" id="address"><?php echo $_SESSION['user_purok'] . " Brgy. " . $_SESSION['user_brgy'] . ', ' . $_SESSION['user_city']; ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-2"><strong>Age:</strong></p>
+                                <p class="text-muted" id="age"><?php echo $_SESSION['user_age'] . " years old. "; ?></p>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -351,12 +355,8 @@ if ($user_role != 0) {
                                 </select>
                                 <label for="fromSanIsidroYN" class="form-label">Are you from San Isidro?</label>
                             </div>
-
                             <!-- Barangay -->
                             <div class="form-floating mb-3">
-                                <?php
-                                $selectedBarangay = isset($_SESSION['user_brgy']) ? $_SESSION['user_brgy'] : '';
-                                ?>
                                 <select name="barangay" id="user_brgy" class="form-select" required>
                                     <option value="" disabled selected>Select Barangay</option>
                                     <option value="Alua">Alua</option>
@@ -372,7 +372,6 @@ if ($user_role != 0) {
                                 <label for="user_brgy" class="form-label">Which Barangay are you from?</label>
                             </div>
                             <hr>
-
                             <!-- Full Name -->
                             <div class="row mb-3">
                                 <div class="col-md-4">
@@ -394,7 +393,6 @@ if ($user_role != 0) {
                                     </div>
                                 </div>
                             </div>
-
                             <!-- gender -->
                             <div class="row">
                                 <div class="col-md-6">
@@ -415,14 +413,27 @@ if ($user_role != 0) {
                                         <label for="user_gender" class="form-label">Sex</label>
                                     </div>
                                 </div>
-
+                                <!-- purok -->
                                 <div class="col-md-6">
+                                    <?php
+                                    $selectedPurok = isset($_SESSION['user_purok']) ? $_SESSION['user_purok'] : '';
+                                    ?>
                                     <div class="form-floating mb-3">
-                                        <input type="number" name="user_purok" class="form-control" id="user_purok" placeholder="Purok" value="<?php echo $_SESSION['user_purok']; ?>" required>
+                                        <select name="user_purok" class="form-select" id="user_purok" required>
+                                            <option value="" disabled <?php echo $selectedPurok === '' ? 'selected' : ''; ?>>Select Purok</option>
+                                            <option value="Purok 1" <?php echo $selectedPurok === 'Purok 1' ? 'selected' : ''; ?>>Purok 1</option>
+                                            <option value="Purok 2" <?php echo $selectedPurok === 'Purok 2' ? 'selected' : ''; ?>>Purok 2</option>
+                                            <option value="Purok 3" <?php echo $selectedPurok === 'Purok 3' ? 'selected' : ''; ?>>Purok 3</option>
+                                            <option value="Purok 4" <?php echo $selectedPurok === 'Purok 4' ? 'selected' : ''; ?>>Purok 4</option>
+                                            <option value="Purok 5" <?php echo $selectedPurok === 'Purok 5' ? 'selected' : ''; ?>>Purok 5</option>
+                                            <option value="Purok 6" <?php echo $selectedPurok === 'Purok 6' ? 'selected' : ''; ?>>Purok 6</option>
+                                            <option value="Purok 7" <?php echo $selectedPurok === 'Purok 7' ? 'selected' : ''; ?>>Purok 7</option>
+                                            <option value="Purok 8" <?php echo $selectedPurok === 'Purok 8' ? 'selected' : ''; ?>>Purok 8</option>
+                                            <option value="Purok 9" <?php echo $selectedPurok === 'Purok 9' ? 'selected' : ''; ?>>Purok 9</option>
+                                        </select>
                                         <label for="user_purok" class="form-label">Purok</label>
                                     </div>
                                 </div>
-
                             </div>
                             <div>
                                 <div class="form-floating mb-3">

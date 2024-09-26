@@ -183,8 +183,6 @@ if ($user_role != 2) {
                 <div class="tab-content mt-2 p-2 bg-dark-subtle rounded" id="nav-tabContent">
                     <!-- municipal -->
                     <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                        <!-- create post -->
-
                         <!-- show all municipal post -->
                         <div id="municipalPost">
 

@@ -3,7 +3,7 @@ include('../../includes/conn.inc.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('location: ../post.c.php');
+    header('location: ../adminPost.b.php');
     exit;
 }
 
@@ -140,7 +140,8 @@ while ($data = mysqli_fetch_assoc($result)) {
                             <div class="mb-3">
                                 <p class="fs-5">
                                     <?php
-                                    echo nl2br($content); ?>
+                                    echo nl2br($content);
+                                    ?>
                                 </p>
                             </div>
 
@@ -171,6 +172,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                                 }
                                 ?>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -199,16 +201,21 @@ while ($data = mysqli_fetch_assoc($result)) {
                 }
             });
 
+            // for modal
             let triggerElement = document.getElementById('cSuperAdminBrgyPost<?php echo $postId; ?>');
+            if (triggerElement) {
+                // Get the modal element
+                let modalElement = new bootstrap.Modal(document.getElementById('viewSuperAdminPostModal<?php echo $postId; ?>'));
 
-            // Get the modal element
-            let modalElement = new bootstrap.Modal(document.getElementById('viewSuperAdminPostModal<?php echo $postId; ?>'));
+                // Add a click event listener to the trigger element
+                triggerElement.addEventListener('click', function() {
+                    // Show the modal
+                    modalElement.show();
+                });
+            } else {
+                console.error("Trigger element 'cSuperAdminBrgyPost<?php echo $postId; ?>' not found.");
+            }
 
-            // Add a click event listener to the trigger element
-            triggerElement.addEventListener('click', function() {
-                // Show the modal
-                modalElement.show();
-            });
 
             function updateMpTextContent() {
                 let $content = $('#mpPost-text<?php echo $postId; ?>-content');

@@ -203,7 +203,7 @@ if ($user_role != 2) {
                                     <option value="Poblacion">Poblacion</option>
                                     <option value="Pulo">Pulo</option>
                                     <option value="San Roque">San Roque</option>
-                                    <option value="Sto Cristo">Sto. Cristo</option>
+                                    <option value="Sto. Cristo">Sto. Cristo</option>
                                     <option value="Tabon">Tabon</option>
                                 </select>
                             </div>
@@ -213,17 +213,16 @@ if ($user_role != 2) {
                                 <label for="purokFilter" class="form-label">Purok</label>
                                 <select class="form-select" id="purokFilter" name="purok">
                                     <option value="">All</option>
-                                    <!-- Add options dynamically from your database -->
-                                    <option value="1">Purok 1</option>
-                                    <option value="2">Purok 2</option>
-                                    <option value="3">Purok 3</option>
-                                    <option value="4">Purok 4</option>
-                                    <option value="5">Purok 5</option>
-                                    <option value="6">Purok 6</option>
-                                    <option value="7">Purok 7</option>
-                                    <option value="8">Purok 8</option>
-                                    <option value="9">Purok 9</option>
-                                    <option value="10">Purok 10</option>
+                                    <option value="Purok 1">Purok 1</option>
+                                    <option value="Purok 2">Purok 2</option>
+                                    <option value="Purok 3">Purok 3</option>
+                                    <option value="Purok 4">Purok 4</option>
+                                    <option value="Purok 5">Purok 5</option>
+                                    <option value="Purok 6">Purok 6</option>
+                                    <option value="Purok 7">Purok 7</option>
+                                    <option value="Purok 8">Purok 8</option>
+                                    <option value="Purok 9">Purok 9</option>
+                                    <option value="Purok 10">Purok 10</option>
                                 </select>
                             </div>
 

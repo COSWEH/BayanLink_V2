@@ -70,6 +70,7 @@ if (isset($_POST['btnUpdate']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_gender'] = $gender;
         $_SESSION['user_contactNum'] = $contactNum;
         $_SESSION['dateOfBirth'] = $dateOfBirth;
+        $_SESSION['user_age'] = $age;
         $_SESSION['placeOfBirth'] = $placeOfBirth;
         $_SESSION['civilStatus'] = $civilStatus;
         $_SESSION['user_purok'] = $user_purok;
