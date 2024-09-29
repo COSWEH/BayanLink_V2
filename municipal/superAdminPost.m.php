@@ -283,6 +283,11 @@ if ($user_role != 2) {
     </div>
 
     <script>
+        document.getElementById('postContent').addEventListener('input', function() {
+            this.style.height = 'auto'; // Reset height first to calculate new height
+            this.style.height = (this.scrollHeight) + 'px'; // Set new height based on scrollHeight
+        });
+
         //load all brgy post from database
         $(document).ready(function() {
             // brgy post

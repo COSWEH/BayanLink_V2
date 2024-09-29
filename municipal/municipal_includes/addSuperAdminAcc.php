@@ -126,13 +126,13 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($countUsername == 1) {
                 $_SESSION['addAdmin_error_message'] = "Username already exists!";
-                header('location: ../superAdminPost.m.php');
+                header('location: ../superAdminDashboard.m.php');
             } elseif ($countEmail == 1) {
                 $_SESSION['addAdmin_error_message'] = "Email address already exists!";
-                header('location: ../superAdminPost.m.php');
+                header('location: ../superAdminDashboard.m.php');
             } elseif ($password != $confirmPassword) {
                 $_SESSION['addAdmin_error_message'] = "Password did not match!";
-                header('location: ../superAdminPost.m.php');
+                header('location: ../superAdminDashboard.m.php');
             } else {
                 $verification_code = mt_rand(100000, 999999);
 
@@ -187,10 +187,10 @@ if (isset($_POST['btnSignup']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         // Concatenate error messages into a single string
         $error_message = implode("<br>", $errors);
         $_SESSION['addAdmin_error_message'] = $error_message;
-        header('location: ../superAdminPost.m.php');
+        header('location: ../superAdminDashboard.m.php');
         exit;
     }
 } else {
-    header('location: ../superAdminPost.m.php');
+    header('location: ../superAdminDashboard.m.php');
     exit;
 }

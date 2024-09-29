@@ -347,9 +347,21 @@ if ($user_role != 2) {
                                     <label for="user_gender" class="form-label">Sex</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="number" name="user_purok" class="form-control" id="user_purok" placeholder="Purok" required>
+                                    <select name="user_purok" class="form-control" id="user_purok" required>
+                                        <option value="" disabled selected>Select Purok</option>
+                                        <option value="Purok 1">Purok 1</option>
+                                        <option value="Purok 2">Purok 2</option>
+                                        <option value="Purok 3">Purok 3</option>
+                                        <option value="Purok 4">Purok 4</option>
+                                        <option value="Purok 5">Purok 5</option>
+                                        <option value="Purok 6">Purok 6</option>
+                                        <option value="Purok 7">Purok 7</option>
+                                        <option value="Purok 8">Purok 8</option>
+                                        <option value="Purok 9">Purok 9</option>
+                                    </select>
                                     <label for="user_purok" class="form-label">Purok</label>
                                 </div>
+
                                 <div class="form-floating mb-3">
                                     <input type="text" name="contactNum" class="form-control" id="contactNum" placeholder="Contact Number" required pattern="^(09\d{9}|639\d{9})$" title="(e.g., 09123456789 or 639123456789)">
                                     <label for="contactNum" class="form-label">Contact Number</label>
@@ -443,7 +455,7 @@ if ($user_role != 2) {
                                         </button>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <button type="submit" class="btn btn-primary w-100" name="submit">
+                                        <button type="submit" class="btn btn-primary w-100" name="btnSignup">
                                             Create Account <i class="bi bi-arrow-right-square"></i>
                                         </button>
                                     </div>
@@ -962,6 +974,9 @@ if ($user_role != 2) {
     </div>
 
     <script>
+        var selectedCity = "<?php echo $_SESSION['user_city']; ?>";
+        document.getElementById('placeOfBirth').value = selectedCity + ', Nueva Ecija';
+
         $(document).ready(function() {
             //load all logs from database
             $.post('municipal_includes/showAllLogs.php', {}, function(data) {
